@@ -37,28 +37,22 @@ def visualize_field_evolution(model, input_seq, max_steps=50, save_path=None):
     
     # Capture field evolution
     field_history = [field.clone()]
-    
+
     with torch.no_grad():
         current_field = field
-        
+
         for step in range(max_steps):
-            # Compute dynamics
             field_derivative = model.dynamics(current_field)
-            
-            # Update field
             new_field = current_field + 0.1 * field_derivative
-            
-            # Save snapshot
             field_history.append(new_field.clone())
-            
-            # Check convergence
+
             change = torch.abs(new_field - current_field).mean()
             if change < 0.01:
                 print(f"Field converged at step {step+1}")
                 break
-                
+
             current_field = new_field
-    
+
     return field_history
 
 
