@@ -1,0 +1,92 @@
+{
+  "128": {
+    "adaptive": {
+      "mean_ms": 26.53577220000045,
+      "std_ms": 3.961609244392207,
+      "avg_steps": 23.125
+    },
+    "fixed_10": {
+      "mean_ms": 11.233108699997274,
+      "std_ms": 3.0750687919138007,
+      "avg_steps": 10.0
+    },
+    "transformer": {
+      "mean_ms": 5.8798243999973465,
+      "std_ms": 0.21952644701244733,
+      "avg_steps": 2.0
+    },
+    "fixed_vs_adaptive_speedup": 2.362282152580513
+  },
+  "256": {
+    "adaptive": {
+      "mean_ms": 37.16566780000221,
+      "std_ms": 4.1126077599496025,
+      "avg_steps": 30.0
+    },
+    "fixed_10": {
+      "mean_ms": 11.347027400000798,
+      "std_ms": 2.2101851968840003,
+      "avg_steps": 10.0
+    },
+    "transformer": {
+      "mean_ms": 3.513299299999062,
+      "std_ms": 1.5837415107309634,
+      "avg_steps": 2.0
+    },
+    "fixed_vs_adaptive_speedup": 3.2753660046682884
+  },
+  "512": {
+    "adaptive": {
+      "mean_ms": 28.069861300005527,
+      "std_ms": 5.884041080681065,
+      "avg_steps": 21.25
+    },
+    "fixed_10": {
+      "mean_ms": 13.547964299999649,
+      "std_ms": 2.386739793489132,
+      "avg_steps": 10.0
+    },
+    "transformer": {
+      "mean_ms": 29.737409500000922,
+      "std_ms": 1.6755779295819282,
+      "avg_steps": 2.0
+    },
+    "fixed_vs_adaptive_speedup": 2.0718877521699888
+  },
+  "1024": {
+    "adaptive": {
+      "mean_ms": 60.41385279999645,
+      "std_ms": 6.018393642232686,
+      "avg_steps": 30.0
+    },
+    "fixed_10": {
+      "mean_ms": 19.618851699996753,
+      "std_ms": 4.120391106024576,
+      "avg_steps": 10.0
+    },
+    "transformer": {
+      "mean_ms": 119.4002979000004,
+      "std_ms": 9.225815509190632,
+      "avg_steps": 2.0
+    },
+    "fixed_vs_adaptive_speedup": 3.079377617192878
+  },
+  "2048": {
+    "adaptive": {
+      "mean_ms": 92.46651380000515,
+      "std_ms": 34.073841353829195,
+      "avg_steps": 29.875
+    },
+    "fixed_10": {
+      "mean_ms": 60.58691559999829,
+      "std_ms": 4.858325689927224,
+      "avg_steps": 10.0
+    },
+    "transformer": {
+      "mean_ms": 502.07419479999663,
+      "std_ms": 9.969644985456162,
+      "avg_steps": 2.0
+    },
+    "fixed_vs_adaptive_speedup": 1.5261795865377863
+  }
+}

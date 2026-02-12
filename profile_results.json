@@ -1,0 +1,388 @@
+{
+  "wavenet_adaptive": {
+    "ops": [
+      {
+        "name": "aten::conv2d",
+        "cpu_time_us": 147083.4320000003,
+        "cpu_time_pct": 17.4,
+        "calls": 450,
+        "cpu_time_per_call_us": 327,
+        "cpu_mem_kb": 307200
+      },
+      {
+        "name": "aten::convolution",
+        "cpu_time_us": 145836.00400000013,
+        "cpu_time_pct": 17.2,
+        "calls": 450,
+        "cpu_time_per_call_us": 324,
+        "cpu_mem_kb": 307200
+      },
+      {
+        "name": "aten::_convolution",
+        "cpu_time_us": 143374.20499999978,
+        "cpu_time_pct": 17.0,
+        "calls": 450,
+        "cpu_time_per_call_us": 319,
+        "cpu_mem_kb": 307200
+      },
+      {
+        "name": "aten::mkldnn_convolution",
+        "cpu_time_us": 140084.6619999997,
+        "cpu_time_pct": 16.6,
+        "calls": 450,
+        "cpu_time_per_call_us": 311,
+        "cpu_mem_kb": 307200
+      },
+      {
+        "name": "aten::gelu",
+        "cpu_time_us": 76398.80399999976,
+        "cpu_time_pct": 9.0,
+        "calls": 155,
+        "cpu_time_per_call_us": 493,
+        "cpu_mem_kb": 153605
+      },
+      {
+        "name": "aten::abs",
+        "cpu_time_us": 22622.318000000138,
+        "cpu_time_pct": 2.7,
+        "calls": 310,
+        "cpu_time_per_call_us": 73,
+        "cpu_mem_kb": 158720
+      },
+      {
+        "name": "aten::mul",
+        "cpu_time_us": 18162.397000000034,
+        "cpu_time_pct": 2.1,
+        "calls": 300,
+        "cpu_time_per_call_us": 61,
+        "cpu_mem_kb": 153600
+      },
+      {
+        "name": "aten::reshape",
+        "cpu_time_us": 14453.958999999817,
+        "cpu_time_pct": 1.7,
+        "calls": 170,
+        "cpu_time_per_call_us": 85,
+        "cpu_mem_kb": 76800
+      },
+      {
+        "name": "aten::mean",
+        "cpu_time_us": 13588.134999999878,
+        "cpu_time_pct": 1.6,
+        "calls": 320,
+        "cpu_time_per_call_us": 42,
+        "cpu_mem_kb": 15
+      },
+      {
+        "name": "aten::copy_",
+        "cpu_time_us": 12836.440999999793,
+        "cpu_time_pct": 1.5,
+        "calls": 805,
+        "cpu_time_per_call_us": 16,
+        "cpu_mem_kb": 0
+      },
+      {
+        "name": "aten::clone",
+        "cpu_time_us": 12733.385000000026,
+        "cpu_time_pct": 1.5,
+        "calls": 160,
+        "cpu_time_per_call_us": 80,
+        "cpu_mem_kb": 79360
+      },
+      {
+        "name": "aten::resize_",
+        "cpu_time_us": 12348.776999999867,
+        "cpu_time_pct": 1.5,
+        "calls": 450,
+        "cpu_time_per_call_us": 27,
+        "cpu_mem_kb": 306688
+      },
+      {
+        "name": "aten::sub",
+        "cpu_time_us": 11346.83800000007,
+        "cpu_time_pct": 1.3,
+        "calls": 300,
+        "cpu_time_per_call_us": 38,
+        "cpu_mem_kb": 153600
+      },
+      {
+        "name": "aten::group_norm",
+        "cpu_time_us": 10627.940000000195,
+        "cpu_time_pct": 1.3,
+        "calls": 150,
+        "cpu_time_per_call_us": 71,
+        "cpu_mem_kb": 76800
+      },
+      {
+        "name": "aten::native_group_norm",
+        "cpu_time_us": 9743.121000000261,
+        "cpu_time_pct": 1.2,
+        "calls": 150,
+        "cpu_time_per_call_us": 65,
+        "cpu_mem_kb": 76809
+      }
+    ],
+    "total_cpu_us": 845700.7030000007
+  },
+  "wavenet_fixed": {
+    "ops": [
+      {
+        "name": "aten::conv2d",
+        "cpu_time_us": 25102.95400000002,
+        "cpu_time_pct": 15.2,
+        "calls": 150,
+        "cpu_time_per_call_us": 167,
+        "cpu_mem_kb": 102400
+      },
+      {
+        "name": "aten::convolution",
+        "cpu_time_us": 24636.179000000106,
+        "cpu_time_pct": 14.9,
+        "calls": 150,
+        "cpu_time_per_call_us": 164,
+        "cpu_mem_kb": 102400
+      },
+      {
+        "name": "aten::_convolution",
+        "cpu_time_us": 23759.708000000017,
+        "cpu_time_pct": 14.4,
+        "calls": 150,
+        "cpu_time_per_call_us": 158,
+        "cpu_mem_kb": 102400
+      },
+      {
+        "name": "aten::mkldnn_convolution",
+        "cpu_time_us": 22735.519000000037,
+        "cpu_time_pct": 13.7,
+        "calls": 150,
+        "cpu_time_per_call_us": 152,
+        "cpu_mem_kb": 102400
+      },
+      {
+        "name": "aten::gelu",
+        "cpu_time_us": 9483.10600000001,
+        "cpu_time_pct": 5.7,
+        "calls": 55,
+        "cpu_time_per_call_us": 172,
+        "cpu_mem_kb": 51205
+      },
+      {
+        "name": "aten::mul",
+        "cpu_time_us": 5886.28100000001,
+        "cpu_time_pct": 3.6,
+        "calls": 100,
+        "cpu_time_per_call_us": 59,
+        "cpu_mem_kb": 51200
+      },
+      {
+        "name": "aten::reshape",
+        "cpu_time_us": 5617.212000000039,
+        "cpu_time_pct": 3.4,
+        "calls": 60,
+        "cpu_time_per_call_us": 94,
+        "cpu_mem_kb": 25600
+      },
+      {
+        "name": "aten::mean",
+        "cpu_time_us": 5130.9700000000375,
+        "cpu_time_pct": 3.1,
+        "calls": 110,
+        "cpu_time_per_call_us": 47,
+        "cpu_mem_kb": 12
+      },
+      {
+        "name": "aten::clone",
+        "cpu_time_us": 4936.6919999999645,
+        "cpu_time_pct": 3.0,
+        "calls": 50,
+        "cpu_time_per_call_us": 99,
+        "cpu_mem_kb": 25600
+      },
+      {
+        "name": "aten::copy_",
+        "cpu_time_us": 4389.949999999989,
+        "cpu_time_pct": 2.7,
+        "calls": 230,
+        "cpu_time_per_call_us": 19,
+        "cpu_mem_kb": 0
+      },
+      {
+        "name": "aten::group_norm",
+        "cpu_time_us": 3855.1209999999846,
+        "cpu_time_pct": 2.3,
+        "calls": 50,
+        "cpu_time_per_call_us": 77,
+        "cpu_mem_kb": 25600
+      },
+      {
+        "name": "aten::abs",
+        "cpu_time_us": 3724.0429999999787,
+        "cpu_time_pct": 2.2,
+        "calls": 110,
+        "cpu_time_per_call_us": 34,
+        "cpu_mem_kb": 56320
+      },
+      {
+        "name": "aten::native_group_norm",
+        "cpu_time_us": 3569.801000000006,
+        "cpu_time_pct": 2.2,
+        "calls": 50,
+        "cpu_time_per_call_us": 71,
+        "cpu_mem_kb": 25603
+      },
+      {
+        "name": "aten::sub",
+        "cpu_time_us": 3568.1320000000255,
+        "cpu_time_pct": 2.2,
+        "calls": 100,
+        "cpu_time_per_call_us": 36,
+        "cpu_mem_kb": 51200
+      },
+      {
+        "name": "aten::add",
+        "cpu_time_us": 3537.5450000000174,
+        "cpu_time_pct": 2.1,
+        "calls": 105,
+        "cpu_time_per_call_us": 34,
+        "cpu_mem_kb": 53760
+      }
+    ],
+    "total_cpu_us": 165569.57900000009
+  },
+  "transformer": {
+    "ops": [
+      {
+        "name": "aten::_transformer_encoder_layer_fwd",
+        "cpu_time_us": 13002.185,
+        "cpu_time_pct": 31.3,
+        "calls": 10,
+        "cpu_time_per_call_us": 1300,
+        "cpu_mem_kb": 5120
+      },
+      {
+        "name": "aten::_native_multi_head_attention",
+        "cpu_time_us": 7598.905999999998,
+        "cpu_time_pct": 18.3,
+        "calls": 10,
+        "cpu_time_per_call_us": 760,
+        "cpu_mem_kb": 5120
+      },
+      {
+        "name": "aten::addmm",
+        "cpu_time_us": 2242.6510000000003,
+        "cpu_time_pct": 5.4,
+        "calls": 30,
+        "cpu_time_per_call_us": 75,
+        "cpu_mem_kb": 10245
+      },
+      {
+        "name": "aten::bmm",
+        "cpu_time_us": 1888.9540000000025,
+        "cpu_time_pct": 4.5,
+        "calls": 20,
+        "cpu_time_per_call_us": 94,
+        "cpu_mem_kb": 81920
+      },
+      {
+        "name": "aten::_addmm_activation",
+        "cpu_time_us": 1866.2970000000023,
+        "cpu_time_pct": 4.5,
+        "calls": 10,
+        "cpu_time_per_call_us": 187,
+        "cpu_mem_kb": 20480
+      },
+      {
+        "name": "aten::copy_",
+        "cpu_time_us": 1819.8949999999925,
+        "cpu_time_pct": 4.4,
+        "calls": 55,
+        "cpu_time_per_call_us": 33,
+        "cpu_mem_kb": 0
+      },
+      {
+        "name": "aten::_softmax",
+        "cpu_time_us": 1713.0679999999988,
+        "cpu_time_pct": 4.1,
+        "calls": 10,
+        "cpu_time_per_call_us": 171,
+        "cpu_mem_kb": 0
+      },
+      {
+        "name": "aten::layer_norm",
+        "cpu_time_us": 1147.4869999999944,
+        "cpu_time_pct": 2.8,
+        "calls": 20,
+        "cpu_time_per_call_us": 57,
+        "cpu_mem_kb": 10248
+      },
+      {
+        "name": "aten::native_layer_norm",
+        "cpu_time_us": 1081.5829999999953,
+        "cpu_time_pct": 2.6,
+        "calls": 20,
+        "cpu_time_per_call_us": 54,
+        "cpu_mem_kb": 10560
+      },
+      {
+        "name": "aten::mm",
+        "cpu_time_us": 939.9179999999996,
+        "cpu_time_pct": 2.3,
+        "calls": 10,
+        "cpu_time_per_call_us": 94,
+        "cpu_mem_kb": 15360
+      },
+      {
+        "name": "aten::_transform_bias_rescale_qkv",
+        "cpu_time_us": 836.8860000000024,
+        "cpu_time_pct": 2.0,
+        "calls": 10,
+        "cpu_time_per_call_us": 84,
+        "cpu_mem_kb": 15360
+      },
+      {
+        "name": "aten::contiguous",
+        "cpu_time_us": 768.8630000000016,
+        "cpu_time_pct": 1.9,
+        "calls": 10,
+        "cpu_time_per_call_us": 77,
+        "cpu_mem_kb": 5120
+      },
+      {
+        "name": "aten::clone",
+        "cpu_time_us": 750.3329999999994,
+        "cpu_time_pct": 1.8,
+        "calls": 10,
+        "cpu_time_per_call_us": 75,
+        "cpu_mem_kb": 5120
+      },
+      {
+        "name": "aten::add_",
+        "cpu_time_us": 687.7009999999991,
+        "cpu_time_pct": 1.7,
+        "calls": 20,
+        "cpu_time_per_call_us": 34,
+        "cpu_mem_kb": 0
+      },
+      {
+        "name": "aten::embedding",
+        "cpu_time_us": 487.68699999999944,
+        "cpu_time_pct": 1.2,
+        "calls": 5,
+        "cpu_time_per_call_us": 98,
+        "cpu_mem_kb": 2560
+      }
+    ],
+    "total_cpu_us": 41558.97299999997
+  },
+  "breakdown": {
+    "embed_ms": 0.6744507000064459,
+    "evolution_ms": 19.56259639999587,
+    "output_ms": 0.2396168999979409,
+    "total_ms": 20.476664000000255,
+    "avg_steps": 20.0,
+    "ms_per_step": 0.9721398049993013,
+    "embed_pct": 3.293752830082271,
+    "evolution_pct": 95.53605216160027,
+    "output_pct": 1.170195008317458
+  }
+}
