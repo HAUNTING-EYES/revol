@@ -13,6 +13,12 @@ vs WaveNetNeuro:
 
 Complexity: O(n) for embedding + O(iterations * embed_dim^2) for inference
 The PC iterations operate on pooled representations, not full sequences.
+
+Architecture:
+1. Embedding + mean pooling -> fixed-size vector
+2. Feedforward initialization (residual) -> layered representations
+3. Iterative PC refinement (error-driven bidirectional updates)
+4. Classification from top-layer representation + skip connection
 """
 
 import torch
@@ -24,10 +30,11 @@ class PredictiveCodingLayer(nn.Module):
     """
     Single predictive coding layer.
 
-    Maintains:
-    - Representation (what this layer "thinks")
-    - Prediction network (predicts layer below)
-    - Error processor (refines based on mismatch)
+    Each layer:
+    - Has a feedforward path (for initialization, with residual)
+    - Can predict the layer below (top-down)
+    - Processes prediction errors (bottom-up)
+    - Updates its representation via gated error correction
     """
 
     def __init__(self, dim, hidden_dim=None):
@@ -35,24 +42,35 @@ class PredictiveCodingLayer(nn.Module):
         self.dim = dim
         hidden_dim = hidden_dim or dim * 2
 
+        # Feedforward: bottom-up transform with residual connection
+        self.ff_transform = nn.Sequential(
+            nn.Linear(dim, hidden_dim),
+            nn.GELU(),
+            nn.Linear(hidden_dim, dim),
+        )
+        self.ff_norm = nn.LayerNorm(dim)
+
         # Top-down: predict what layer below should be
         self.predict_down = nn.Sequential(
             nn.Linear(dim, hidden_dim),
             nn.GELU(),
             nn.Linear(hidden_dim, dim),
-            nn.LayerNorm(dim),
         )
 
-        # Bottom-up: process prediction error
+        # Bottom-up: process prediction error into update signal
         self.process_error = nn.Sequential(
             nn.Linear(dim, hidden_dim),
             nn.GELU(),
             nn.Linear(hidden_dim, dim),
-            nn.LayerNorm(dim),
         )
+        self.update_norm = nn.LayerNorm(dim)
 
-        # Inference learning rate (how fast to update representation)
-        self.inference_lr = nn.Parameter(torch.tensor(0.1))
+        # Learnable step size for error-driven updates
+        self.step_size = nn.Parameter(torch.tensor(0.3))
+
+    def init_representation(self, input_below):
+        """Feedforward initialization with residual connection."""
+        return self.ff_norm(input_below + self.ff_transform(input_below))
 
     def predict(self, representation):
         """Predict what input should be (top-down prediction)."""
@@ -63,9 +81,9 @@ class PredictiveCodingLayer(nn.Module):
         return actual - prediction
 
     def update(self, representation, error):
-        """Update representation to minimize error."""
-        error_signal = self.process_error(error)
-        return representation + self.inference_lr * error_signal
+        """Update representation via error-driven correction with residual."""
+        correction = self.process_error(error)
+        return self.update_norm(representation + self.step_size * correction)
 
 
 class PredictiveCodingNetwork(nn.Module):
@@ -73,14 +91,15 @@ class PredictiveCodingNetwork(nn.Module):
     Multi-layer predictive coding network.
 
     Architecture:
-    Input -> Layer1 <-> Layer2 <-> Layer3 <-> Layer4 -> Output
-              errors^    errors^    errors^
-              predict v  predict v  predict v
+    Input -> [FF Init] -> Layer1 <-> Layer2 <-> Layer3 <-> Layer4 -> Output
+                           errors^    errors^    errors^
+                           predict v  predict v  predict v
 
-    Each iteration:
-    1. Bottom-up: compute prediction errors at each layer
-    2. Top-down: update representations to reduce errors
-    3. Check convergence: stop when representations stabilize
+    Key design decisions:
+    - Residual feedforward init: gradient highway through all layers
+    - Skip connection: ff_output added to PC output for stable training
+    - Detached convergence check: prevents compute graph explosion
+    - Per-example adaptive stopping: each example converges independently
     """
 
     def __init__(
@@ -113,7 +132,7 @@ class PredictiveCodingNetwork(nn.Module):
             for _ in range(num_layers)
         ])
 
-        # Classifier
+        # Classifier (takes both skip and refined representation)
         self.classifier = nn.Sequential(
             nn.Linear(embed_dim, embed_dim // 2),
             nn.GELU(),
@@ -123,6 +142,9 @@ class PredictiveCodingNetwork(nn.Module):
     def inference(self, x: torch.Tensor) -> Tuple[torch.Tensor, float, Dict]:
         """
         Iterative inference with bidirectional passes.
+
+        Phase 1: Fast feedforward sweep (residual) for initialization
+        Phase 2: Iterative PC refinement with error-driven updates
 
         Args:
             x: pooled input embeddings [batch, embed_dim]
@@ -134,13 +156,26 @@ class PredictiveCodingNetwork(nn.Module):
         batch_size = x.size(0)
         device = x.device
 
-        # Initialize representations (start at zero)
-        reps = [
-            torch.zeros(batch_size, self.embed_dim, device=device)
-            for _ in range(self.num_layers)
-        ]
+        # Phase 1: Feedforward initialization with residual connections
+        reps = []
+        current = x
+        for layer in self.layers:
+            current = layer.init_representation(current)
+            reps.append(current)
 
-        # Per-example convergence tracking
+        # Save feedforward output for skip connection
+        ff_output = reps[-1]
+
+        # Phase 2: Iterative PC refinement
+        if self.max_iterations == 0:
+            # Pure feedforward mode (no iterations)
+            steps_per_example = torch.zeros(batch_size, device=device)
+            return ff_output, 0.0, {
+                'per_example_steps': steps_per_example.cpu(),
+                'changes_history': [],
+                'ponder_cost': torch.tensor(0.0),
+            }
+
         converged = torch.zeros(batch_size, dtype=torch.bool, device=device)
         steps_per_example = torch.full(
             (batch_size,), float(self.max_iterations), dtype=torch.float, device=device
@@ -150,67 +185,73 @@ class PredictiveCodingNetwork(nn.Module):
         initial_change: Optional[torch.Tensor] = None
 
         for iteration in range(self.max_iterations):
-            old_reps = [r.clone() for r in reps]
+            # Detach old reps for convergence check (not for computation)
+            old_reps_detached = [r.detach() for r in reps]
 
             # BOTTOM-UP: Compute prediction errors
             errors = []
 
-            # Layer 0 error: input vs prediction from layer 0
-            prediction_0 = self.layers[0].predict(reps[0])
-            error_0 = self.layers[0].compute_error(x, prediction_0)
-            errors.append(error_0)
+            # Layer 0: compare input to what layer 0 predicts the input is
+            pred_0 = self.layers[0].predict(reps[0])
+            err_0 = self.layers[0].compute_error(x, pred_0)
+            errors.append(err_0)
 
-            # Higher layer errors: each layer predicts the layer below
+            # Higher layers: each layer predicts the layer below
             for i in range(1, self.num_layers):
-                prediction = self.layers[i].predict(reps[i])
-                error = self.layers[i].compute_error(reps[i - 1], prediction)
-                errors.append(error)
+                pred_i = self.layers[i].predict(reps[i])
+                err_i = self.layers[i].compute_error(reps[i - 1].detach(), pred_i)
+                errors.append(err_i)
 
             # TOP-DOWN + BOTTOM-UP: Update representations
+            new_reps = []
             for i in range(self.num_layers):
                 error_below = errors[i]
 
                 if self.bidirectional and i < self.num_layers - 1:
-                    # Error from layer above: how well does the layer above predict us?
                     pred_from_above = self.layers[i + 1].predict(reps[i + 1])
                     error_above = reps[i] - pred_from_above
                 else:
                     error_above = torch.zeros_like(reps[i])
 
                 total_error = error_below + 0.5 * error_above
-                reps[i] = self.layers[i].update(reps[i], total_error)
+                new_reps.append(self.layers[i].update(reps[i], total_error))
 
-            # Per-example convergence check
-            per_example_change = torch.stack([
-                (new - old).abs().mean(dim=-1)
-                for new, old in zip(reps, old_reps)
-            ], dim=0).max(dim=0).values  # [batch]
+            reps = new_reps
 
-            if iteration == 0:
-                initial_change = per_example_change.clone().clamp(min=1e-8)
+            # Per-example convergence check (detached to save memory)
+            with torch.no_grad():
+                per_example_change = torch.stack([
+                    (new - old).abs().mean(dim=-1)
+                    for new, old in zip(reps, old_reps_detached)
+                ], dim=0).max(dim=0).values
 
-            changes_history.append(per_example_change.mean().item())
+                if iteration == 0:
+                    initial_change = per_example_change.clamp(min=1e-8)
 
-            relative_change = per_example_change / initial_change
+                changes_history.append(per_example_change.mean().item())
+                relative_change = per_example_change / initial_change
 
-            newly_converged = (~converged) & (relative_change < self.convergence_threshold)
-            if newly_converged.any():
-                steps_per_example[newly_converged] = iteration + 1
-                for layer_idx in range(self.num_layers):
-                    final_reps[layer_idx][newly_converged] = reps[layer_idx][newly_converged]
-                converged = converged | newly_converged
+                newly_converged = (~converged) & (relative_change < self.convergence_threshold)
+                if newly_converged.any():
+                    steps_per_example[newly_converged] = iteration + 1
+                    for li in range(self.num_layers):
+                        final_reps[li][newly_converged] = reps[li][newly_converged]
+                    converged = converged | newly_converged
 
-            if converged.all():
-                break
+                if converged.all():
+                    break
 
         # Fill in non-converged examples
         not_converged = ~converged
         if not_converged.any():
-            for layer_idx in range(self.num_layers):
-                final_reps[layer_idx][not_converged] = reps[layer_idx][not_converged]
+            for li in range(self.num_layers):
+                final_reps[li][not_converged] = reps[li][not_converged]
+
+        # Combine refined output with skip connection from feedforward
+        output_rep = final_reps[-1] + ff_output
 
         avg_steps = steps_per_example.mean().item()
-        ponder_cost = steps_per_example.mean() / self.max_iterations
+        ponder_cost = steps_per_example.mean() / max(self.max_iterations, 1)
 
         info = {
             'per_example_steps': steps_per_example.detach().cpu(),
@@ -218,7 +259,7 @@ class PredictiveCodingNetwork(nn.Module):
             'ponder_cost': ponder_cost,
         }
 
-        return final_reps[-1], avg_steps, info
+        return output_rep, avg_steps, info
 
     def forward(
         self, x: torch.Tensor, **kwargs
@@ -274,6 +315,7 @@ def make_pc_variant(
       'bottom_up_only' - no top-down predictions
       'iterations_5'   - fixed 5 iterations
       'iterations_10'  - fixed 10 iterations
+      'iterations_0'   - pure feedforward (no PC iterations)
       'depth_2'        - 2 layers
       'depth_6'        - 6 layers
       'depth_8'        - 8 layers
@@ -292,13 +334,11 @@ def make_pc_variant(
         return PredictiveCodingNetwork(**kwargs, bidirectional=True)
     elif variant == 'bottom_up_only':
         return PredictiveCodingNetwork(**kwargs, bidirectional=False)
-    elif variant == 'iterations_5':
-        kwargs['max_iterations'] = 5
-        kwargs['convergence_threshold'] = 1e-10  # never converge early
-        return PredictiveCodingNetwork(**kwargs, bidirectional=True)
-    elif variant == 'iterations_10':
-        kwargs['max_iterations'] = 10
-        kwargs['convergence_threshold'] = 1e-10
+    elif variant.startswith('iterations_'):
+        n = int(variant.split('_')[1])
+        kwargs['max_iterations'] = n
+        if n > 0:
+            kwargs['convergence_threshold'] = 1e-10  # never converge early
         return PredictiveCodingNetwork(**kwargs, bidirectional=True)
     elif variant.startswith('depth_'):
         depth = int(variant.split('_')[1])
