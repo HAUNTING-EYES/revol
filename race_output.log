@@ -1,0 +1,75 @@
+================================================================================
+RACE MULTIPLE CHOICE BENCHMARK
+PredCoding vs Transformer
+================================================================================
+
+Device: cpu
+Config: seq_len=256, batch=16, epochs=10
+
+--- Loading RACE ---
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  Vocab: 20000
+  Loading RACE middle/train...
+  Loading RACE middle/test...
+  Train: 5000, Test: 1000
+
+--- Parameter Counts ---
+  PredCoding_MC              1,498,437
+  PredCoding_MC_0iter        1,498,437
+  Transformer_MC             1,365,441
+
+================================================================================
+TRAINING: PredCoding_MC
+================================================================================
+  Epoch 1/10 | Loss: 1.3794 | Train: 0.2828 | Test: 0.3200 | Time: 38.1s
+  Epoch 2/10 | Loss: 1.3743 | Train: 0.3004 | Test: 0.3140 | Time: 37.6s
+  Epoch 3/10 | Loss: 1.3677 | Train: 0.3136 | Test: 0.2980 | Time: 37.0s
+  Epoch 4/10 | Loss: 1.3350 | Train: 0.3426 | Test: 0.2980 | Time: 36.5s
+  Epoch 5/10 | Loss: 1.2928 | Train: 0.3758 | Test: 0.2910 | Time: 36.0s
+  Epoch 6/10 | Loss: 1.2407 | Train: 0.4008 | Test: 0.2920 | Time: 36.1s
+  Epoch 7/10 | Loss: 1.1965 | Train: 0.4260 | Test: 0.2880 | Time: 36.2s
+  Epoch 8/10 | Loss: 1.1573 | Train: 0.4490 | Test: 0.2830 | Time: 36.0s
+  Epoch 9/10 | Loss: 1.1263 | Train: 0.4646 | Test: 0.2860 | Time: 36.0s
+  Epoch 10/10 | Loss: 1.1099 | Train: 0.4730 | Test: 0.2850 | Time: 36.8s
+
+================================================================================
+TRAINING: PredCoding_MC_0iter
+================================================================================
+  Epoch 1/10 | Loss: 1.3818 | Train: 0.2804 | Test: 0.2900 | Time: 11.1s
+  Epoch 2/10 | Loss: 1.3776 | Train: 0.2994 | Test: 0.2830 | Time: 11.0s
+  Epoch 3/10 | Loss: 1.3725 | Train: 0.3102 | Test: 0.3010 | Time: 11.0s
+  Epoch 4/10 | Loss: 1.3823 | Train: 0.2968 | Test: 0.2940 | Time: 11.1s
+  Epoch 5/10 | Loss: 1.3578 | Train: 0.3336 | Test: 0.2960 | Time: 11.1s
+  Epoch 6/10 | Loss: 1.3239 | Train: 0.3592 | Test: 0.3080 | Time: 11.0s
+  Epoch 7/10 | Loss: 1.2902 | Train: 0.3782 | Test: 0.3090 | Time: 11.1s
+  Epoch 8/10 | Loss: 1.2599 | Train: 0.3912 | Test: 0.3070 | Time: 11.1s
+  Epoch 9/10 | Loss: 1.2432 | Train: 0.4014 | Test: 0.3000 | Time: 11.3s
+  Epoch 10/10 | Loss: 1.2320 | Train: 0.4048 | Test: 0.3040 | Time: 11.0s
+
+================================================================================
+TRAINING: Transformer_MC
+================================================================================
+  Epoch 1/10 | Loss: 1.3780 | Train: 0.2916 | Test: 0.3000 | Time: 128.6s
+  Epoch 2/10 | Loss: 1.3657 | Train: 0.3116 | Test: 0.2960 | Time: 128.5s
+  Epoch 3/10 | Loss: 1.3533 | Train: 0.3162 | Test: 0.3000 | Time: 128.0s
+  Epoch 4/10 | Loss: 1.3265 | Train: 0.3408 | Test: 0.3000 | Time: 127.5s
+  Epoch 5/10 | Loss: 1.2996 | Train: 0.3802 | Test: 0.3090 | Time: 128.8s
+  Epoch 6/10 | Loss: 1.2507 | Train: 0.3964 | Test: 0.3020 | Time: 127.5s
+  Epoch 7/10 | Loss: 1.2073 | Train: 0.4272 | Test: 0.2890 | Time: 127.4s
+  Epoch 8/10 | Loss: 1.1677 | Train: 0.4398 | Test: 0.2960 | Time: 127.7s
+  Epoch 9/10 | Loss: 1.1507 | Train: 0.4502 | Test: 0.2920 | Time: 127.7s
+  Epoch 10/10 | Loss: 1.1383 | Train: 0.4516 | Test: 0.2920 | Time: 127.4s
+
+================================================================================
+RACE RESULTS
+================================================================================
+  Random baseline: 25.0%
+Model                       Test Acc     Best     Params    Time(s)
+-----------------------------------------------------------------
+PredCoding_MC                0.2850  0.3200  1,498,437     366.2
+PredCoding_MC_0iter          0.3040  0.3090  1,498,437     110.9
+Transformer_MC               0.2920  0.3090  1,365,441    1279.2
+  PredCoding_MC: NEAR RANDOM (28.5%)
+  PredCoding_MC_0iter: NEAR RANDOM (30.4%)
+
+Results saved to /home/user/revol/race_results.json

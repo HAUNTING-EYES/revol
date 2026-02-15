@@ -1,0 +1,45 @@
+================================================================================
+QA ERROR ANALYSIS
+================================================================================
+
+--- RACE Error Analysis ---
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  Loading RACE middle/test...
+  Loading RACE middle/train...
+  PC accuracy: 0.2660
+  TF accuracy: 0.2400
+
+  Q-Type      Count   PC Acc   TF Acc    Delta
+  ---------------------------------------------
+  other         320   0.287   0.250  +0.037
+  what           89   0.191   0.213  -0.022
+  when           27   0.296   0.259  +0.037
+  how            23   0.348   0.174  +0.174
+  who            19   0.211   0.158  +0.053
+  why            14   0.143   0.357  -0.214
+  where           8   0.250   0.250  +0.000
+
+  --- By Context Length ---
+  Length           Count   PC Acc   TF Acc
+  ----------------------------------------
+  short(<100)         26   0.308   0.231
+  medium(100-200)    235   0.285   0.298
+  long(>200)         239   0.243   0.184
+
+--- SQuAD Error Analysis ---
+  Loading SQuAD 2.0 validation...
+  Loading SQuAD 2.0 train...
+  PC: EM=0.5060, F1=0.1129, Ans=0.4820
+  TF: EM=0.4800, F1=0.1114, Ans=0.4820
+
+  Q-Type      Count    PC F1    TF F1    Delta
+  ---------------------------------------------
+  what          263   0.556   0.518  +0.038
+  other          95   0.475   0.447  +0.027
+  how            46   0.473   0.494  -0.021
+  when           35   0.443   0.461  -0.018
+  who            34   0.471   0.387  +0.084
+  where          21   0.530   0.484  +0.047
+  why             6   0.524   0.667  -0.143
+
+Error analysis saved to /home/user/revol/qa_error_analysis.json
