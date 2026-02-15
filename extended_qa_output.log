@@ -132,3 +132,5 @@ TRAINING: Transformer (12,750,980 params)
     Batch 300: loss=11.9049
     Batch 350: loss=11.9064
   Epoch  4/10 | Loss: 11.9055 | Ans_F1: 0.0189 | Ans_EM: 0.0000 | Time: 191.0s
+    Batch 50: loss=11.9173
+    Batch 100: loss=11.9070
