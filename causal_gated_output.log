@@ -1,0 +1,108 @@
+======================================================================
+PART 1: Synthetic Causal Dataset
+  X₁ CAUSES Y, X₂ is spuriously correlated (80% in train)
+  Test set: X₂ is RANDOM (shortcut fails)
+======================================================================
+Train: 5000, Test: 2000, Features: 10
+Train label balance: 0.50
+Test  label balance: 0.52
+
+--- MLP ---
+  Params: 9,154
+  Final test acc: 0.9150  Best: 0.9500
+
+--- Transformer ---
+  Params: 25,858
+  Final test acc: 0.9490  Best: 0.9495
+
+--- Causal Gated Network ---
+  Params: 33,650
+  Final test acc: 0.9170  Best: 0.9495
+
+--- Gate Interpretability ---
+  Feature importance (avg |gate weight|):
+    X₁ (causal)     : 0.1630 ███
+    X₂ (spurious)   : 0.1562 ███
+    noise_0         : 0.2502 █████
+    noise_1         : 0.2362 ████
+    noise_2         : 0.2154 ████
+    noise_3         : 0.2076 ████
+    noise_4         : 0.2257 ████
+    noise_5         : 0.2148 ████
+    noise_6         : 0.1838 ███
+    noise_7         : 0.1917 ███
+
+  Feature contribution (|W| * |G|):
+    X₁ (causal)     : 0.0244 
+    X₂ (spurious)   : 0.0212 
+    noise_0         : 0.0455 █
+    noise_1         : 0.0460 █
+    noise_2         : 0.0462 █
+    noise_3         : 0.0419 █
+    noise_4         : 0.0367 █
+    noise_5         : 0.0445 █
+    noise_6         : 0.0322 █
+    noise_7         : 0.0309 █
+
+--- Sample Efficiency ---
+  10% data (500 samples): MLP=94.85%  Transformer=94.90%  CausalGated=95.00%
+  25% data (1,250 samples): MLP=95.00%  Transformer=94.95%  CausalGated=94.65%
+  50% data (2,500 samples): MLP=94.85%  Transformer=95.00%  CausalGated=94.95%
+  100% data (5,000 samples): MLP=94.95%  Transformer=94.95%  CausalGated=95.00%
+
+======================================================================
+Model                  Best Acc     Params
+----------------------------------------------------------------------
+MLP                     95.00%      9,154
+Transformer             94.95%     25,858
+CausalGated             94.95%     33,650
+======================================================================
+
+======================================================================
+PART 2: IMDB Sentiment (10K train, 5K test)
+======================================================================
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Tokenising IMDB train …
+  Label balance: 0.500
+Tokenising IMDB test  …
+  Label balance: 0.501
+
+--- CausalGated_d256 ---
+  Parameters: 8,676,868
+  ep 1/8  tr=0.6421  te=0.7536  loss=0.5271  30s
+  ep 2/8  tr=0.7867  te=0.7686  loss=0.4841  31s
+  ep 3/8  tr=0.8308  te=0.7802  loss=0.4673  32s
+  ep 4/8  tr=0.8620  te=0.7918  loss=0.4731  30s
+  ep 5/8  tr=0.8859  te=0.7908  loss=0.4681  30s
+  ep 6/8  tr=0.8994  te=0.7936  loss=0.4764  31s
+  ep 7/8  tr=0.9120  te=0.7908  loss=0.4803  31s
+  ep 8/8  tr=0.9174  te=0.7926  loss=0.4801  31s
+  Gate sparsity: {'layer_0_mix_gate_sparsity': 0.0022292137145996094, 'layer_1_mix_gate_sparsity': 0.005006313323974609, 'layer_2_mix_gate_sparsity': 0.020224571228027344, 'layer_3_mix_gate_sparsity': 0.058091163635253906}
+  BEST: 0.7936  Inference: 15.0 ms/batch
+
+--- CausalGated_d128 ---
+  Parameters: 4,141,828
+  ep 1/8  tr=0.5998  te=0.6692  loss=0.6088  14s
+  ep 2/8  tr=0.7404  te=0.7486  loss=0.5195  14s
+  ep 3/8  tr=0.7925  te=0.7668  loss=0.4927  13s
+  ep 4/8  tr=0.8275  te=0.7850  loss=0.4729  13s
+  ep 5/8  tr=0.8457  te=0.7824  loss=0.4658  13s
+  ep 6/8  tr=0.8614  te=0.7844  loss=0.4648  13s
+  ep 7/8  tr=0.8759  te=0.7850  loss=0.4630  13s
+  ep 8/8  tr=0.8802  te=0.7864  loss=0.4630  13s
+  Gate sparsity: {'layer_0_mix_gate_sparsity': 0.0016717910766601562, 'layer_1_mix_gate_sparsity': 0.0010061264038085938, 'layer_2_mix_gate_sparsity': 0.004801750183105469, 'layer_3_mix_gate_sparsity': 0.029829978942871094}
+  BEST: 0.7864  Inference: 7.9 ms/batch
+
+Saved → causal_gated_results.json
+
+===========================================================================
+FINAL COMPARISON — IMDB Sentiment
+===========================================================================
+Model                          Acc       Params
+-------------------------------------------------------
+Transformer                83.88%    1,644,258
+WaveNetNeuro               83.96%    1,320,035
+PredCoding (prior)          82.50%        ~1.5M
+CausalGated_d256           79.36%    8,676,868
+CausalGated_d128           78.64%    4,141,828
+=======================================================
