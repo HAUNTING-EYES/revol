@@ -1,0 +1,29 @@
+{
+  "PredCoding_Span": {
+    "final_em": 0.506,
+    "final_f1": 0.121928760387445,
+    "best_f1": 0.13106345986670528,
+    "answerable_acc": 0.491,
+    "answerable_em": 0.1075050709939148,
+    "total_train_time": 210.09754061698914,
+    "parameters": 1510950
+  },
+  "PredCoding_Span_0iter": {
+    "final_em": 0.519,
+    "final_f1": 0.12860675685007328,
+    "best_f1": 0.13043939096763088,
+    "answerable_acc": 0.495,
+    "answerable_em": 0.11561866125760649,
+    "total_train_time": 64.64064192771912,
+    "parameters": 1510950
+  },
+  "Transformer_Span": {
+    "final_em": 0.501,
+    "final_f1": 0.11962137518516056,
+    "best_f1": 0.13156498673740052,
+    "answerable_acc": 0.492,
+    "answerable_em": 0.10344827586206896,
+    "total_train_time": 560.1599323749542,
+    "parameters": 1365604
+  }
+}

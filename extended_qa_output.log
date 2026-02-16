@@ -1,0 +1,136 @@
+================================================================================
+EXTENDED QA TEST: Learning Curve Divergence
+Does Transformer keep improving while PredCoding stays flat?
+================================================================================
+
+--- Loading SQuAD 2.0 ---
+  Loading SQuAD 2.0 train...
+    Skipped 3 truncated answers
+    Processed 2997 examples
+  Loading SQuAD 2.0 validation...
+    Skipped 1 truncated answers
+    Processed 499 examples
+  Train: 2997 (1946 answerable)
+  Test: 499 (240 answerable)
+
+================================================================================
+TRAINING: PredCoding (17,676,170 params)
+================================================================================
+    Batch 50: loss=8.3358
+    Batch 100: loss=8.0215
+    Batch 150: loss=7.9749
+    Batch 200: loss=7.9351
+    Batch 250: loss=7.8180
+    Batch 300: loss=7.8382
+    Batch 350: loss=7.8729
+  Epoch  1/10 | Loss: 7.8645 | Ans_F1: 0.0000 | Ans_EM: 0.0000 | Time: 55.0s
+    Batch 50: loss=7.1313
+    Batch 100: loss=7.1518
+    Batch 150: loss=7.1807
+    Batch 200: loss=7.2417
+    Batch 250: loss=7.2406
+    Batch 300: loss=7.2380
+    Batch 350: loss=7.1873
+  Epoch  2/10 | Loss: 7.1534 | Ans_F1: 0.0000 | Ans_EM: 0.0000 | Time: 51.3s
+    Batch 50: loss=6.6552
+    Batch 100: loss=6.7791
+    Batch 150: loss=6.7454
+    Batch 200: loss=6.8132
+    Batch 250: loss=6.7887
+    Batch 300: loss=6.7270
+    Batch 350: loss=6.7246
+  Epoch  3/10 | Loss: 6.7164 | Ans_F1: 0.0000 | Ans_EM: 0.0000 | Time: 52.2s
+    Batch 50: loss=6.5317
+    Batch 100: loss=6.4687
+    Batch 150: loss=6.3611
+    Batch 200: loss=6.3604
+    Batch 250: loss=6.3704
+    Batch 300: loss=6.3548
+    Batch 350: loss=6.3742
+  Epoch  4/10 | Loss: 6.3865 | Ans_F1: 0.0000 | Ans_EM: 0.0000 | Time: 51.1s
+    Batch 50: loss=6.1026
+    Batch 100: loss=6.1352
+    Batch 150: loss=6.1105
+    Batch 200: loss=6.1322
+    Batch 250: loss=6.1632
+    Batch 300: loss=6.1267
+    Batch 350: loss=6.1277
+  Epoch  5/10 | Loss: 6.1309 | Ans_F1: 0.0000 | Ans_EM: 0.0000 | Time: 50.5s
+    Batch 50: loss=5.9486
+    Batch 100: loss=5.9164
+    Batch 150: loss=5.9524
+    Batch 200: loss=5.9521
+    Batch 250: loss=5.9823
+    Batch 300: loss=5.9381
+    Batch 350: loss=5.9385
+  Epoch  6/10 | Loss: 5.9626 | Ans_F1: 0.0025 | Ans_EM: 0.0000 | Time: 51.1s
+    Batch 50: loss=5.7103
+    Batch 100: loss=5.5989
+    Batch 150: loss=5.7748
+    Batch 200: loss=5.7803
+    Batch 250: loss=5.8136
+    Batch 300: loss=5.8370
+    Batch 350: loss=5.8154
+  Epoch  7/10 | Loss: 5.8185 | Ans_F1: 0.0003 | Ans_EM: 0.0000 | Time: 51.3s
+    Batch 50: loss=5.6888
+    Batch 100: loss=5.7385
+    Batch 150: loss=5.7547
+    Batch 200: loss=5.7497
+    Batch 250: loss=5.7567
+    Batch 300: loss=5.7507
+    Batch 350: loss=5.7270
+  Epoch  8/10 | Loss: 5.7113 | Ans_F1: 0.0014 | Ans_EM: 0.0000 | Time: 50.9s
+    Batch 50: loss=5.6932
+    Batch 100: loss=5.5327
+    Batch 150: loss=5.5532
+    Batch 200: loss=5.5672
+    Batch 250: loss=5.5891
+    Batch 300: loss=5.5986
+    Batch 350: loss=5.6405
+  Epoch  9/10 | Loss: 5.6371 | Ans_F1: 0.0016 | Ans_EM: 0.0000 | Time: 52.8s
+    Batch 50: loss=5.6708
+    Batch 100: loss=5.5463
+    Batch 150: loss=5.5101
+    Batch 200: loss=5.5696
+    Batch 250: loss=5.5705
+    Batch 300: loss=5.5617
+    Batch 350: loss=5.5936
+  Epoch 10/10 | Loss: 5.5981 | Ans_F1: 0.0016 | Ans_EM: 0.0000 | Time: 52.2s
+
+================================================================================
+TRAINING: Transformer (12,750,980 params)
+================================================================================
+    Batch 50: loss=8.0969
+    Batch 100: loss=8.6549
+    Batch 150: loss=8.9098
+    Batch 200: loss=8.8775
+    Batch 250: loss=8.9100
+    Batch 300: loss=8.9539
+    Batch 350: loss=8.9913
+  Epoch  1/10 | Loss: 9.0047 | Ans_F1: 0.0000 | Ans_EM: 0.0000 | Time: 192.6s
+    Batch 50: loss=8.7440
+    Batch 100: loss=8.9793
+    Batch 150: loss=8.9673
+    Batch 200: loss=9.2528
+    Batch 250: loss=9.7854
+    Batch 300: loss=10.1411
+    Batch 350: loss=10.3945
+  Epoch  2/10 | Loss: 10.4944 | Ans_F1: 0.0222 | Ans_EM: 0.0000 | Time: 194.3s
+    Batch 50: loss=11.9085
+    Batch 100: loss=11.9072
+    Batch 150: loss=11.9105
+    Batch 200: loss=11.9101
+    Batch 250: loss=11.9127
+    Batch 300: loss=11.9134
+    Batch 350: loss=11.9126
+  Epoch  3/10 | Loss: 11.9127 | Ans_F1: 0.0238 | Ans_EM: 0.0000 | Time: 193.0s
+    Batch 50: loss=11.8964
+    Batch 100: loss=11.9001
+    Batch 150: loss=11.9000
+    Batch 200: loss=11.9025
+    Batch 250: loss=11.9030
+    Batch 300: loss=11.9049
+    Batch 350: loss=11.9064
+  Epoch  4/10 | Loss: 11.9055 | Ans_F1: 0.0189 | Ans_EM: 0.0000 | Time: 191.0s
+    Batch 50: loss=11.9173
+    Batch 100: loss=11.9070

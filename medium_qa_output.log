@@ -1,0 +1,277 @@
+================================================================================
+MEDIUM-SCALE SQuAD EXPERIMENT
+PredCoding (15M) vs Transformer (13M) with BERT tokenizer
+================================================================================
+
+Device: cpu
+Config: seq_len=384, batch=8, epochs=5
+Train: 5000, Test: 1000
+
+--- Loading SQuAD 2.0 ---
+  Loading SQuAD 2.0 train...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+    Skipped 5 truncated answers
+    Processed 4995 examples
+  Loading SQuAD 2.0 validation...
+    Skipped 2 truncated answers
+    Processed 998 examples
+
+  Train: 4995 total, 3272 answerable
+  Test:  998 total, 491 answerable
+
+--- Models ---
+  PredCoding_PC10             17,676,170 params
+  PredCoding_PC0              17,676,170 params
+  Transformer_6L              12,750,980 params
+
+================================================================================
+TRAINING: PredCoding_PC10
+================================================================================
+    Batch 50: loss=8.6927
+    Batch 100: loss=8.3947
+    Batch 150: loss=8.3812
+    Batch 200: loss=8.2913
+    Batch 250: loss=8.2702
+    Batch 300: loss=8.1950
+    Batch 350: loss=8.1415
+    Batch 400: loss=8.0724
+    Batch 450: loss=8.0314
+    Batch 500: loss=8.0160
+    Batch 550: loss=8.0084
+    Batch 600: loss=8.0113
+  Epoch 1/5 | Loss: 7.9951 | EM: 0.5080 | F1: 0.5080 | Ans_F1: 0.0000 | Time: 83.9s
+    Batch 50: loss=7.5564
+    Batch 100: loss=7.6607
+    Batch 150: loss=7.6312
+    Batch 200: loss=7.6068
+    Batch 250: loss=7.6335
+    Batch 300: loss=7.6043
+    Batch 350: loss=7.6155
+    Batch 400: loss=7.6190
+    Batch 450: loss=7.5992
+    Batch 500: loss=7.5831
+    Batch 550: loss=7.5796
+    Batch 600: loss=7.5796
+  Epoch 2/5 | Loss: 7.5729 | EM: 0.5080 | F1: 0.5080 | Ans_F1: 0.0000 | Time: 84.9s
+    Batch 50: loss=7.4124
+    Batch 100: loss=7.3364
+    Batch 150: loss=7.2929
+    Batch 200: loss=7.1964
+    Batch 250: loss=7.1720
+    Batch 300: loss=7.2073
+    Batch 350: loss=7.1649
+    Batch 400: loss=7.1641
+    Batch 450: loss=7.1455
+    Batch 500: loss=7.1493
+    Batch 550: loss=7.1389
+    Batch 600: loss=7.1296
+  Epoch 3/5 | Loss: 7.1323 | EM: 0.5080 | F1: 0.5080 | Ans_F1: 0.0000 | Time: 83.6s
+    Batch 50: loss=7.0469
+    Batch 100: loss=7.0623
+    Batch 150: loss=7.0088
+    Batch 200: loss=6.9463
+    Batch 250: loss=6.8959
+    Batch 300: loss=6.9325
+    Batch 350: loss=6.9027
+    Batch 400: loss=6.8632
+    Batch 450: loss=6.8527
+    Batch 500: loss=6.8649
+    Batch 550: loss=6.8682
+    Batch 600: loss=6.8417
+  Epoch 4/5 | Loss: 6.8418 | EM: 0.5080 | F1: 0.5080 | Ans_F1: 0.0000 | Time: 82.6s
+    Batch 50: loss=6.4973
+    Batch 100: loss=6.5325
+    Batch 150: loss=6.6831
+    Batch 200: loss=6.6436
+    Batch 250: loss=6.6650
+    Batch 300: loss=6.6866
+    Batch 350: loss=6.6729
+    Batch 400: loss=6.6692
+    Batch 450: loss=6.6854
+    Batch 500: loss=6.6874
+    Batch 550: loss=6.7151
+    Batch 600: loss=6.7041
+  Epoch 5/5 | Loss: 6.7069 | EM: 0.5080 | F1: 0.5080 | Ans_F1: 0.0000 | Time: 84.1s
+
+================================================================================
+TRAINING: PredCoding_PC0
+================================================================================
+    Batch 50: loss=9.4303
+    Batch 100: loss=8.8434
+    Batch 150: loss=8.5250
+    Batch 200: loss=8.4649
+    Batch 250: loss=8.4179
+    Batch 300: loss=8.3276
+    Batch 350: loss=8.2341
+    Batch 400: loss=8.1622
+    Batch 450: loss=8.1279
+    Batch 500: loss=8.0750
+    Batch 550: loss=8.0263
+    Batch 600: loss=8.0108
+  Epoch 1/5 | Loss: 8.0048 | EM: 0.5080 | F1: 0.5080 | Ans_F1: 0.0000 | Time: 40.0s
+    Batch 50: loss=7.4971
+    Batch 100: loss=7.4765
+    Batch 150: loss=7.5338
+    Batch 200: loss=7.5193
+    Batch 250: loss=7.5144
+    Batch 300: loss=7.5873
+    Batch 350: loss=7.5919
+    Batch 400: loss=7.5624
+    Batch 450: loss=7.5571
+    Batch 500: loss=7.5178
+    Batch 550: loss=7.5164
+    Batch 600: loss=7.5303
+  Epoch 2/5 | Loss: 7.5274 | EM: 0.5080 | F1: 0.5080 | Ans_F1: 0.0000 | Time: 40.0s
+    Batch 50: loss=7.2484
+    Batch 100: loss=7.1265
+    Batch 150: loss=7.2955
+    Batch 200: loss=7.2500
+    Batch 250: loss=7.1876
+    Batch 300: loss=7.1538
+    Batch 350: loss=7.1422
+    Batch 400: loss=7.1534
+    Batch 450: loss=7.1442
+    Batch 500: loss=7.1251
+    Batch 550: loss=7.1194
+    Batch 600: loss=7.1053
+  Epoch 3/5 | Loss: 7.1139 | EM: 0.5080 | F1: 0.5080 | Ans_F1: 0.0000 | Time: 40.1s
+    Batch 50: loss=6.6406
+    Batch 100: loss=6.8048
+    Batch 150: loss=6.8696
+    Batch 200: loss=6.9182
+    Batch 250: loss=6.9145
+    Batch 300: loss=6.8577
+    Batch 350: loss=6.8358
+    Batch 400: loss=6.8280
+    Batch 450: loss=6.8435
+    Batch 500: loss=6.8628
+    Batch 550: loss=6.8507
+    Batch 600: loss=6.8533
+  Epoch 4/5 | Loss: 6.8396 | EM: 0.5080 | F1: 0.5080 | Ans_F1: 0.0000 | Time: 40.3s
+    Batch 50: loss=6.3268
+    Batch 100: loss=6.3845
+    Batch 150: loss=6.5576
+    Batch 200: loss=6.6398
+    Batch 250: loss=6.6307
+    Batch 300: loss=6.6478
+    Batch 350: loss=6.6652
+    Batch 400: loss=6.6746
+    Batch 450: loss=6.7053
+    Batch 500: loss=6.7150
+    Batch 550: loss=6.7120
+    Batch 600: loss=6.6956
+  Epoch 5/5 | Loss: 6.7001 | EM: 0.5080 | F1: 0.5080 | Ans_F1: 0.0000 | Time: 40.3s
+
+================================================================================
+TRAINING: Transformer_6L
+================================================================================
+    Batch 50: loss=10.3642
+    Batch 100: loss=9.2308
+    Batch 150: loss=8.7634
+    Batch 200: loss=8.3693
+    Batch 250: loss=8.2108
+    Batch 300: loss=8.0836
+    Batch 350: loss=7.9869
+    Batch 400: loss=7.9489
+    Batch 450: loss=7.8599
+    Batch 500: loss=7.8398
+    Batch 550: loss=7.8112
+    Batch 600: loss=7.7820
+  Epoch 1/5 | Loss: 7.7654 | EM: 0.5080 | F1: 0.5080 | Ans_F1: 0.0000 | Time: 312.3s
+    Batch 50: loss=6.5196
+    Batch 100: loss=6.5099
+    Batch 150: loss=6.5277
+    Batch 200: loss=6.5433
+    Batch 250: loss=6.5803
+    Batch 300: loss=6.5450
+    Batch 350: loss=6.5838
+    Batch 400: loss=6.5372
+    Batch 450: loss=6.5942
+    Batch 500: loss=6.6027
+    Batch 550: loss=6.6160
+    Batch 600: loss=6.6084
+  Epoch 2/5 | Loss: 6.6153 | EM: 0.5070 | F1: 0.5070 | Ans_F1: 0.0000 | Time: 320.8s
+    Batch 50: loss=5.8860
+    Batch 100: loss=5.7436
+    Batch 150: loss=5.8043
+    Batch 200: loss=5.8784
+    Batch 250: loss=5.8980
+    Batch 300: loss=5.8410
+    Batch 350: loss=5.8334
+    Batch 400: loss=5.8845
+    Batch 450: loss=5.8873
+    Batch 500: loss=5.8887
+    Batch 550: loss=5.9016
+    Batch 600: loss=5.9041
+  Epoch 3/5 | Loss: 5.9105 | EM: 0.5080 | F1: 0.5080 | Ans_F1: 0.0000 | Time: 320.6s
+    Batch 50: loss=4.9039
+    Batch 100: loss=4.9824
+    Batch 150: loss=4.9237
+    Batch 200: loss=4.9100
+    Batch 250: loss=4.8782
+    Batch 300: loss=4.8799
+    Batch 350: loss=4.8950
+    Batch 400: loss=4.8733
+    Batch 450: loss=4.8766
+    Batch 500: loss=4.9058
+    Batch 550: loss=4.9064
+    Batch 600: loss=4.9210
+  Epoch 4/5 | Loss: 4.9240 | EM: 0.3467 | F1: 0.3551 | Ans_F1: 0.0190 | Time: 317.7s
+    Batch 50: loss=3.7099
+    Batch 100: loss=3.8435
+    Batch 150: loss=3.7485
+    Batch 200: loss=3.7471
+    Batch 250: loss=3.7502
+    Batch 300: loss=3.7114
+    Batch 350: loss=3.6949
+    Batch 400: loss=3.7074
+    Batch 450: loss=3.6878
+    Batch 500: loss=3.6864
+    Batch 550: loss=3.6830
+    Batch 600: loss=3.6691
+  Epoch 5/5 | Loss: 3.6639 | EM: 0.1984 | F1: 0.2087 | Ans_F1: 0.0251 | Time: 317.8s
+
+================================================================================
+MEDIUM-SCALE SQuAD 2.0 RESULTS
+================================================================================
+
+Model                           EM       F1   Ans_EM   Ans_F1  Best_F1       Params
+----------------------------------------------------------------------------------
+PredCoding_PC10            0.5080  0.5080  0.0000  0.0000  0.0000   17,676,170
+PredCoding_PC0             0.5080  0.5080  0.0000  0.0000  0.0000   17,676,170
+Transformer_6L             0.1984  0.2087  0.0041  0.0251  0.0251   12,750,980
+
+--- Hypothesis Test ---
+  Transformer F1: 0.0251
+  PredCoding F1:  0.0000
+  Gap:            +0.0251
+  HYPOTHESIS B SUPPORTED: Pooling viable for QA (gap < 5%)
+
+--- Error Analysis by Question Type ---
+
+  Q-Type      Count    PC F1    TF F1      Gap
+  ---------------------------------------------
+  what          532   0.541   0.221  -0.321
+  other         148   0.426   0.196  -0.230
+  how            90   0.522   0.184  -0.338
+  when           69   0.449   0.237  -0.212
+  who            65   0.492   0.202  -0.290
+  where          41   0.488   0.145  -0.343
+  which          39   0.436   0.174  -0.262
+  why            14   0.643   0.224  -0.419
+
+--- Error Analysis by Answer Length ---
+  Length        Count    PC F1    TF F1      Gap
+  ---------------------------------------------
+  1-2 tokens      276   0.000   0.023  +0.023
+  3-5 tokens      146   0.000   0.022  +0.022
+  6+ tokens        69   0.000   0.039  +0.039
+
+--- Error Analysis by Answer Position ---
+  Position              Count    PC F1    TF F1      Gap
+  -------------------------------------------------------
+  beginning (0-25%)       186   0.000   0.026  +0.026
+  middle (25-75%)         225   0.000   0.027  +0.027
+  end (75-100%)            80   0.000   0.016  +0.016
+
+Results saved to /home/user/revol/large_qa_results.json

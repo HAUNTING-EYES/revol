@@ -1,0 +1,20 @@
+{
+  "PredCoding_MC": {
+    "final_test_acc": 0.285,
+    "best_test_acc": 0.32,
+    "total_train_time": 366.2242856025696,
+    "parameters": 1498437
+  },
+  "PredCoding_MC_0iter": {
+    "final_test_acc": 0.304,
+    "best_test_acc": 0.309,
+    "total_train_time": 110.93578290939331,
+    "parameters": 1498437
+  },
+  "Transformer_MC": {
+    "final_test_acc": 0.292,
+    "best_test_acc": 0.309,
+    "total_train_time": 1279.2310812473297,
+    "parameters": 1365441
+  }
+}

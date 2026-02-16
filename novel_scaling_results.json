@@ -1,0 +1,162 @@
+{
+  "512": {
+    "Transformer": {
+      "mean_ms": 4.015453199986041,
+      "std_ms": 0.6330566268268122,
+      "params": 774882,
+      "status": "OK"
+    },
+    "WaveNet_F10": {
+      "mean_ms": 9.393056400017485,
+      "std_ms": 0.31122109358582184,
+      "params": 697507,
+      "status": "OK"
+    },
+    "PredCoding_Pooled": {
+      "mean_ms": 13.65782059999674,
+      "std_ms": 0.9557434839046122,
+      "params": 874854,
+      "status": "OK"
+    },
+    "HierPC": {
+      "mean_ms": 94.75508140003512,
+      "std_ms": 8.780530095772102,
+      "params": 939814,
+      "status": "OK"
+    },
+    "MultiScale": {
+      "mean_ms": 20.79823319998013,
+      "std_ms": 0.23986503549505836,
+      "params": 751399,
+      "status": "OK"
+    }
+  },
+  "1024": {
+    "Transformer": {
+      "mean_ms": 50.305100000014136,
+      "std_ms": 0.8941119354386926,
+      "params": 807650,
+      "status": "OK"
+    },
+    "WaveNet_F10": {
+      "mean_ms": 10.794216399995094,
+      "std_ms": 0.3847323917075824,
+      "params": 729187,
+      "status": "OK"
+    },
+    "PredCoding_Pooled": {
+      "mean_ms": 12.821027600011803,
+      "std_ms": 0.755496658330126,
+      "params": 907622,
+      "status": "OK"
+    },
+    "HierPC": {
+      "mean_ms": 99.39903759998288,
+      "std_ms": 3.870284575792464,
+      "params": 972582,
+      "status": "OK"
+    },
+    "MultiScale": {
+      "mean_ms": 46.98026660000778,
+      "std_ms": 2.4827258092159368,
+      "params": 784167,
+      "status": "OK"
+    }
+  },
+  "2048": {
+    "Transformer": {
+      "mean_ms": 192.13404660001743,
+      "std_ms": 6.002018284945424,
+      "params": 873186,
+      "status": "OK"
+    },
+    "WaveNet_F10": {
+      "mean_ms": 14.541938199977267,
+      "std_ms": 0.5113973450390001,
+      "params": 799075,
+      "status": "OK"
+    },
+    "PredCoding_Pooled": {
+      "mean_ms": 13.232276999997339,
+      "std_ms": 0.3007215570369277,
+      "params": 973158,
+      "status": "OK"
+    },
+    "HierPC": {
+      "mean_ms": 115.34623420000116,
+      "std_ms": 3.9795747409691615,
+      "params": 1038118,
+      "status": "OK"
+    },
+    "MultiScale": {
+      "mean_ms": 126.70188759998382,
+      "std_ms": 5.042707964022271,
+      "params": 849703,
+      "status": "OK"
+    }
+  },
+  "4096": {
+    "Transformer": {
+      "mean_ms": 752.3334471999988,
+      "std_ms": 15.200140261627311,
+      "params": 1004258,
+      "status": "OK"
+    },
+    "WaveNet_F10": {
+      "mean_ms": 39.92286459999832,
+      "std_ms": 3.669387151641437,
+      "params": 925795,
+      "status": "OK"
+    },
+    "PredCoding_Pooled": {
+      "mean_ms": 13.891223399969022,
+      "std_ms": 0.6654797004427122,
+      "params": 1104230,
+      "status": "OK"
+    },
+    "HierPC": {
+      "mean_ms": 299.0319146000047,
+      "std_ms": 25.4456482125268,
+      "params": 1169190,
+      "status": "OK"
+    },
+    "MultiScale": {
+      "mean_ms": 451.0107198000014,
+      "std_ms": 15.424010479433749,
+      "params": 980775,
+      "status": "OK"
+    }
+  },
+  "8192": {
+    "Transformer": {
+      "mean_ms": 2973.0982871999913,
+      "std_ms": 39.498662223561695,
+      "params": 1266402,
+      "status": "OK"
+    },
+    "WaveNet_F10": {
+      "mean_ms": 97.2126225999773,
+      "std_ms": 28.403339687612714,
+      "params": 1193635,
+      "status": "OK"
+    },
+    "PredCoding_Pooled": {
+      "mean_ms": 14.167603200030499,
+      "std_ms": 1.0871008544962808,
+      "params": 1366374,
+      "status": "OK"
+    },
+    "HierPC": {
+      "mean_ms": 396.9793772000003,
+      "std_ms": 44.78560981866381,
+      "params": 1431334,
+      "status": "OK"
+    },
+    "MultiScale": {
+      "mean_ms": 1564.389247400004,
+      "std_ms": 29.654152443605224,
+      "params": 1242919,
+      "status": "OK"
+    }
+  }
+}
